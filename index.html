@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تحدي كرة القدم مع إياد شادي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #e74c3c;
+            --accent: #f1c40f;
+            --success: #2ecc71;
+            --light: #ffffff;
+            --light-bg: #f9f9f9;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --border: #e0e0e0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 10px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+        
+        /* الهيدر */
+        header {
+            background: var(--light);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--accent);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo h1 {
+            font-size: 1.6rem;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 5px 0;
+            line-height: 1.3;
+        }
+        
+        .logo p {
+            font-size: 1rem;
+            color: var(--text);
+            max-width: 100%;
+        }
+        
+        .expert-name {
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 0 2px;
+            font-size: 0.9rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 8px 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            flex: 1;
+            min-width: 90px;
+        }
+        
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 3px 0;
+        }
+        
+        .stat-label {
+            color: var(--text);
+            font-size: 0.85rem;
+        }
+        
+        /* شريط التقدم */
+        .progress-container {
+            background: var(--light);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+        
+        .progress-bar {
+            height: 14px;
+            background: #ecf0f1;
+            border-radius: 7px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 7px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-weight: 500;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        
+        /* منطقة الأسئلة */
+        .quiz-section {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--primary);
+        }
+        
+        .quiz-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary), var(--primary));
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-header h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .quiz-header p {
+            font-size: 0.95rem;
+            color: var(--text);
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .difficulty {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+            background: linear-gradient(to right, var(--secondary), #c0392b);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+        
+        /* السؤال والخيارات */
+        .question-container {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border);
+        }
+        
+        .question-number {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: var(--primary);
+            color: white;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+            padding-right: 10px;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .option {
+            background: var(--light-bg);
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 55px;
+        }
+        
+        .option:hover {
+            border-color: var(--primary);
+        }
+        
+        .option.selected {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .option-prefix {
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        
+        /* أزرار التنقل */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex: 1;
+            min-height: 50px;
+        }
+        
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            display: block;
+            margin: 15px auto 0;
+            font-weight: bold;
+            width: 100%;
+            max-width: 300px;
+            min-height: 50px;
+        }
+        
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        /* تعليق الخبير */
+        .expert-comment {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 14px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        
+        .expert-avatar {
+            min-width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .expert-comment p {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        
+        .expert-comment .name {
+            font-weight: bold;
+            color: var(--secondary);
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+        
+        /* النتائج */
+        .result-section {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 20px 15px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 2px solid var(--accent);
+            display: none;
+        }
+        
+        .result-header {
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 15px 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .score-value {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            line-height: 1.5;
+            padding: 0 10px;
+        }
+        
+        .comparison {
+            background: linear-gradient(to right, rgba(241, 196, 15, 0.15), rgba(52, 152, 219, 0.15));
+            padding: 15px;
+            border-radius: 14px;
+            margin: 20px 0;
+            border: 1px dashed var(--accent);
+        }
+        
+        .comparison h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .comparison p {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .expert-name-large {
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 0 3px;
+            font-size: 1.1rem;
+        }
+        
+        .restart-btn {
+            background: linear-gradient(to right, var(--accent), #f39c12);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+            width: 100%;
+            max-width: 300px;
+            min-height: 50px;
+        }
+        
+        /* الفوتر */
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .creator {
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+        
+        /* تأثيرات الحركة */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+        
+        /* تعديلات الشاشات المتوسطة والكبيرة */
+        @media (min-width: 480px) {
+            .container {
+                padding: 0 15px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question-text {
+                font-size: 1.25rem;
+            }
+            
+            .option {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                font-size: 18px;
+            }
+            
+            .container {
+                max-width: 700px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .logo h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">إ.ش</div>
+                <h1>تحدي كرة القدم مع إياد شادي</h1>
+                <p>اختبر معرفتك الكروية مع أصعب الأسئلة التي صممها خبيرنا <span class="expert-name">إياد شادي</span></p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value">20</div>
+                    <div class="stat-label">سؤال صعب</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2025</div>
+                    <div class="stat-label">أحدث المعلومات</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0.2%</div>
+                    <div class="stat-label">معدل النجاح</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="quiz-progress" style="width: 5%;"></div>
+            </div>
+            <div class="progress-text">
+                <span>التقدم: <span id="current-question">1</span>/20</span>
+                <span>تمت الإجابة: <span id="answered-count">0</span></span>
+            </div>
+        </div>
+        
+        <div class="quiz-section">
+            <div class="quiz-header">
+                <h2>تحدي المعرفة الكروية</h2>
+                <p>أصعب أسئلة كرة القدم التي صممها خبيرنا <span class="expert-name">إياد شادي</span></p>
+                <div class="difficulty">
+                    <i class="fas fa-fire"></i>
+                    مستوى الصعوبة: خارق
+                </div>
+            </div>
+            
+            <div id="question-container">
+                <!-- Questions will be loaded here by JavaScript -->
+            </div>
+            
+            <button id="submit-btn" class="submit-btn" disabled>تقديم الإجابات</button>
+        </div>
+        
+        <div class="expert-comment">
+            <div class="expert-avatar">إ.ش</div>
+            <p>"لا تثق بسهولة أي سؤال هنا، لقد صممت هذه الأسئلة لتكون تحديًا حقيقيًا حتى لأكثر المشجعين دراية!"<br>
+            <span class="name">- إياد شادي، الخبير الكروي</span></p>
+        </div>
+        
+        <div class="result-section" id="result-section">
+            <div class="result-header">
+                <h2 class="result-title">نتائج التحدي الكروي</h2>
+                <p>لقد أكملت اختبار معرفة كرة القدم الذي صممه <span class="expert-name">إياد شادي</span></p>
+            </div>
+            
+            <div class="score-display">
+                <span class="score-value" id="final-score">0</span>/20
+            </div>
+            
+            <div class="message" id="result-message">
+                <!-- Result message will be inserted here -->
+            </div>
+            
+            <div class="comparison">
+                <h3>مقارنة بإياد شادي</h3>
+                <p id="comparison-text">إياد شادي بيفهم كورة أحسن منك بكتير!</p>
+            </div>
+            
+            <button class="restart-btn" onclick="location.reload()">
+                <i class="fas fa-redo"></i> حاول مرة أخرى
+            </button>
+        </div>
+        
+        <footer>
+            <div class="footer-logo">تحدي كرة القدم مع إياد شادي</div>
+            <p>المرجع الأفضل لاختبار معرفتك الكروية</p>
+            <p class="creator">أنشأه: إياد شادي - الخبير الكروي الأول</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+      const questions = [
+  {
+    question: "أكبر فوز رسمي في تاريخ كرة القدم؟",
+    options: ["149–0", "36–0", "31–0", "96–0"],
+    correct: 0
+  },
+  {
+    question: "أسرع هاتريك في كل المستويات الكروية؟",
+    options: ["90 ثانية", "134 ثانية", "3 دقائق", "70 ثانية"],
+    correct: 0
+  },
+  {
+    question: "أول حارس مرمى يسجل أكثر من 100 هدف؟",
+    options: ["رودريغو سيني", "روبرتو كالار", "نيلييه", "إيغور أكينفييف"],
+    correct: 0
+  },
+  {
+    question: "أطول هدف بالرأس في المباريات الرسمية؟",
+    options: ["جون سامويلسن", "أسمير بيغوفيتش", "روني", "إيدن هازارد"],
+    correct: 0
+  },
+  {
+    question: "أكبر عدد بطاقات حمراء للاعب واحد؟",
+    options: ["جيراردو بيدويا", "سيرجيو راموس", "بروس هول", "نيجل دي يانج"],
+    correct: 0
+  },
+  {
+    question: "أكبر عدد بطاقات حمراء في مباراة واحدة؟",
+    options: ["36", "22", "14", "40"],
+    correct: 0
+  },
+  {
+    question: "أكبر لاعب سناً خاض مباراة رسمية؟",
+    options: ["إسحاق هاييك", "كازويا ميورا", "بيلي", "ستانلي ماثيوز"],
+    correct: 0
+  },
+  {
+    question: "هاتريك كبديل في دوري الأبطال بأسرع وقت؟",
+    options: ["ساديو ماني", "محمد صلاح", "أجويرو", "سترلينج"],
+    correct: 0
+  },
+  {
+    question: "أكبر عدد أهداف للاعب في نسخة كأس عالم واحدة؟",
+    options: ["جوست فونتين", "ميروسلاف كلوزه", "رونالدو", "بيليه"],
+    correct: 0
+  },
+  {
+    question: "أسرع ركلة جزاء احتُسبت بعد نزول بديل؟",
+    options: ["نيكلاس بندتنر", "جيفن ستوكس", "جوني ريب", "براكلي"],
+    correct: 0
+  },
+  {
+    question: "أطول مباراة كرة قدم رسمية؟",
+    options: ["3 ساعات و23 دقيقة", "4 ساعات", "2 ساعات", "5 ساعات"],
+    correct: 0
+  },
+  {
+    question: "أكبر عدد أهداف مسجل في تاريخ المسابقات القارية؟",
+    options: ["ليفربول", "الأهلي المصري", "فلامينغو", "ريال مدريد"],
+    correct: 1
+  },
+  {
+    question: "أكثر عدد أهداف سجلها لاعب في سنة ميلادية واحدة؟",
+    options: ["ميسّي 91", "مولر 85", "رونالدو 69", "بيليه 75"],
+    correct: 0
+  },
+  {
+    question: "أكبر حضور جماهيري في مباراة كرة قدم؟",
+    options: ["ماراكانا 1950", "ويمبلي", "أولد ترافورد", "كامب نو"],
+    correct: 0
+  },
+  {
+    question: "أكبر عدد ركلات جزاء في مباراة واحدة؟",
+    options: ["48", "34", "22", "50"],
+    correct: 0
+  },
+  {
+    question: "أكبر عدد هاتريكات متتالية للاعب واحد؟",
+    options: ["ماساشي ناكاياما", "مورينو", "بيكيه", "ماني"],
+    correct: 0
+  },
+  {
+    question: "أطول هدف من ركلة حرة مباشرة؟",
+    options: ["توم كينج", "روني", "بيغوفيتش", "هازيارد"],
+    correct: 0
+  },
+  {
+    question: "أكثر لاعب شارك في دوري أبطال أوروبا كحارس؟",
+    options: ["كاسياس", "بوفون", "نوير", "تشيك"],
+    correct: 0
+  },
+  {
+    question: "أكثر عدد مباريات دولية للاعب كرة قدم؟",
+    options: ["كريستيانو", "داني ألفيس", "تشافي", "رونالدو"],
+    correct: 0
+  },
+  {
+    question: "أول لاعب سجل في خمس نسخ مختلفة من كأس العالم؟",
+    options: ["كريستيانو رونالدو", "ميسي", "بيليه", "مارادونا"],
+    correct: 0
+  }
+];
+
+
+            
+            const questionContainer = document.getElementById('question-container');
+            const submitBtn = document.getElementById('submit-btn');
+            const resultSection = document.getElementById('result-section');
+            const finalScore = document.getElementById('final-score');
+            const resultMessage = document.getElementById('result-message');
+            const comparisonText = document.getElementById('comparison-text');
+            const progressFill = document.getElementById('quiz-progress');
+            const currentQuestionEl = document.getElementById('current-question');
+            const answeredCountEl = document.getElementById('answered-count');
+            
+            let currentQuestion = 0;
+            let userAnswers = new Array(questions.length).fill(null);
+            let answeredCount = 0;
+            
+            // Initialize quiz
+            renderQuestion();
+            updateProgress();
+            
+            function renderQuestion() {
+                if (currentQuestion >= questions.length) return;
+                
+                const q = questions[currentQuestion];
+                let optionsHtml = '';
+                
+                q.options.forEach((option, index) => {
+                    optionsHtml += `
+                        <div class="option" data-index="${index}">
+                            <div class="option-prefix">${String.fromCharCode(65 + index)}</div>
+                            <div>${option}</div>
+                        </div>
+                    `;
+                });
+                
+                // Add navigation buttons
+                const navigationHtml = `
+                    <div class="navigation-buttons">
+                        <button class="nav-btn" id="prev-btn" ${currentQuestion === 0 ? 'disabled' : ''}>
+                            <i class="fas fa-arrow-right"></i> السابق
+                        </button>
+                        
+                        <button class="nav-btn" id="next-btn" ${currentQuestion === questions.length - 1 ? 'disabled' : ''}>
+                            التالي <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                `;
+                
+                const questionHtml = `
+                    <div class="question-container fade-in">
+                        <div class="question-header">
+                            <div class="question-number">${currentQuestion + 1}</div>
+                            <div class="question-text">${q.question}</div>
+                        </div>
+                        <div class="options-grid">
+                            ${optionsHtml}
+                        </div>
+                        ${navigationHtml}
+                    </div>
+                `;
+                
+                questionContainer.innerHTML = questionHtml;
+                
+                // Add event listeners to options
+                document.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        // Remove selection from other options in this question
+                        this.parentElement.querySelectorAll('.option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        
+                        // Select this option
+                        this.classList.add('selected');
+                        
+                        // Save user answer
+                        userAnswers[currentQuestion] = parseInt(this.dataset.index);
+                        
+                        // Update answered count
+                        if (userAnswers[currentQuestion] !== null) {
+                            answeredCount++;
+                            answeredCountEl.textContent = answeredCount;
+                        }
+                        
+                        // Enable submit button if all questions answered
+                        submitBtn.disabled = !userAnswers.every(answer => answer !== null);
+                        
+                        // Enable next button
+                        if (currentQuestion < questions.length - 1) {
+                            document.getElementById('next-btn').disabled = false;
+                        }
+                    });
+                });
+                
+                // Add event listeners to navigation buttons
+                document.getElementById('prev-btn').addEventListener('click', goToPrevQuestion);
+                document.getElementById('next-btn').addEventListener('click', goToNextQuestion);
+                
+                currentQuestionEl.textContent = currentQuestion + 1;
+            }
+            
+            function goToNextQuestion() {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    renderQuestion();
+                    updateProgress();
+                }
+            }
+            
+            function goToPrevQuestion() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    renderQuestion();
+                    updateProgress();
+                }
+            }
+            
+            function updateProgress() {
+                const progress = (answeredCount / questions.length) * 100;
+                progressFill.style.width = `${progress}%`;
+            }
+            
+            submitBtn.addEventListener('click', function() {
+                calculateResults();
+                resultSection.style.display = 'block';
+                resultSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            function calculateResults() {
+                let score = 0;
+                
+                // Calculate score
+                for (let i = 0; i < questions.length; i++) {
+                    if (userAnswers[i] === questions[i].correct) {
+                        score++;
+                    }
+                }
+                
+                // Display score
+                finalScore.textContent = score;
+                
+                // Show result message
+                let message = '';
+                let comparison = '';
+                
+                if (score >= 8) {
+                    message = 'مذهل! أنت تمتلك معرفة كروية استثنائية، لقد اقتربت جداً من مستوى <span class="expert-name-large">إياد شادي</span> في فهم كرة القدم.';
+                    comparison = 'مستواك قريب جداً من مستوى إياد شادي في فهم كرة القدم!';
+                } else if (score >= 6) {
+                    message = 'أداء ممتاز! معرفتك الكروية عميقة، لكن <span class="expert-name-large">إياد شادي</span> لا يزال متفوقاً في بعض التفاصيل.';
+                    comparison = 'أنت وإياد شادي متقاربان جداً في الفهم الكروي';
+                } else if (score >= 4) {
+                    message = 'جيد، لديك معرفة كروية جيدة لكن <span class="expert-name-large">إياد شادي</span> لا يزال يفهم كرة القدم أفضل منك.';
+                    comparison = 'إياد شادي لا يزال يفهم كرة القدم أفضل منك، لكن الفرق ليس كبيراً';
+                } else if (score >= 2) {
+                    message = 'معرفة متوسطة، <span class="expert-name-large">إياد شادي</span> يفهم كرة القدم أفضل منك بمراحل. ادرس أكثر!';
+                    comparison = 'إياد شادي يفهم كرة القدم أفضل منك بشكل واضح';
+                } else {
+                    message = 'للأسف، معرفتك الكروية محدودة. <span class="expert-name-large">إياد شادي</span> يفهم كرة القدم أفضل منك بمراحل كثيرة!';
+                    comparison = 'إياد شادي بيفهم كورة أحسن منك بكتير!';
+                }
+                
+                resultMessage.innerHTML = message;
+                comparisonText.textContent = comparison;
+            }
+        });
+    </script>
+</body>
+</html>
